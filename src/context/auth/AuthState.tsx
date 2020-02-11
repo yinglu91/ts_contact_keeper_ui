@@ -4,19 +4,14 @@ import AuthContext from './authContext';
 import authReducer from './authReducer';
 import setAuthToken from '../../utils/setAuthToken';
 
-import {
-  REGISTER_SUCCESS,
-  REGISTER_FAIL,
-  USER_LOADED,
-  AUTH_ERROR,
-  LOGIN_SUCCESS,
-  LOGIN_FAIL,
-  LOGOUT,
-  CLEAR_ERRORS
-} from '../types';
+import { AuthActionTypes, AuthReducerState } from './types';
 
-const AuthState = props => {
-  const initialState = {
+interface Props {
+  children: React.ReactNode;
+}
+
+const AuthState: React.ComponentType<Props> = props => {
+  const initialState: AuthReducerState = {
     token: localStorage.getItem('token'),
     isAuthenticated: null,
     loading: true,
@@ -39,11 +34,14 @@ const AuthState = props => {
       const res = await axios.get('/api/auth');
 
       dispatch({
-        type: USER_LOADED,
+        type: AuthActionTypes.userLoaded, //USER_LOADED,
         payload: res.data
       });
     } catch (err) {
-      dispatch({ type: AUTH_ERROR });
+      dispatch({
+        type: AuthActionTypes.authError,
+        error: 'failed to load user'
+      });
     }
   };
 
@@ -59,15 +57,15 @@ const AuthState = props => {
       const res = await axios.post('/api/users', formData, config);
 
       dispatch({
-        type: REGISTER_SUCCESS,
-        payload: res.data
+        type: AuthActionTypes.registerSuccess,
+        auth: res.data
       });
 
       loadUser();
     } catch (err) {
       dispatch({
-        type: REGISTER_FAIL,
-        payload: err.response.data.msg
+        type: AuthActionTypes.registerFail,
+        error: err.response.data.msg
       });
     }
   };
@@ -84,24 +82,24 @@ const AuthState = props => {
       const res = await axios.post('/api/auth', formData, config);
 
       dispatch({
-        type: LOGIN_SUCCESS,
-        payload: res.data
+        type: AuthActionTypes.loginSuccess,
+        auth: res.data // {"token" : "345345"}
       });
 
       loadUser();
     } catch (err) {
       dispatch({
-        type: LOGIN_FAIL,
-        payload: err.response.data.msg
+        type: AuthActionTypes.loginFail,
+        error: err.response.data.msg
       });
     }
   };
 
   // Logout
-  const logout = () => dispatch({ type: LOGOUT });
+  const logout = () => dispatch({ type: AuthActionTypes.logout });
 
   // Clear Errors
-  const clearErrors = () => dispatch({ type: CLEAR_ERRORS });
+  const clearErrors = () => dispatch({ type: AuthActionTypes.clearErrors });
 
   return (
     <AuthContext.Provider

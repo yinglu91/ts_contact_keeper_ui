@@ -1,35 +1,26 @@
-import {
-  REGISTER_SUCCESS,
-  REGISTER_FAIL,
-  USER_LOADED,
-  AUTH_ERROR,
-  LOGIN_SUCCESS,
-  LOGIN_FAIL,
-  LOGOUT,
-  CLEAR_ERRORS
-} from '../types';
+import { AuthActionTypes, AuthAction, AuthReducerState } from './types';
 
-export default (state, action) => {
+const AuthReducer = (state: AuthReducerState, action: AuthAction) => {
   switch (action.type) {
-    case USER_LOADED:
+    case AuthActionTypes.userLoaded:
       return {
         ...state,
         isAuthenticated: true,
         loading: false,
         user: action.payload
       };
-    case REGISTER_SUCCESS:
-    case LOGIN_SUCCESS:
-      localStorage.setItem('token', action.payload.token);
+    case AuthActionTypes.registerSuccess:
+    case AuthActionTypes.loginSuccess:
+      localStorage.setItem('token', action.auth.token);
       return {
         ...state,
-        ...action.payload,
+        ...action.auth,
         isAuthenticated: true,
         loading: false
       };
-    case REGISTER_FAIL:
-    case AUTH_ERROR:
-    case LOGIN_FAIL:
+    case AuthActionTypes.registerFail:
+    case AuthActionTypes.authError:
+    case AuthActionTypes.loginFail:
       localStorage.removeItem('token');
       return {
         ...state,
@@ -37,9 +28,9 @@ export default (state, action) => {
         isAuthenticated: false,
         loading: false,
         user: null,
-        error: action.payload
+        error: action.error
       };
-    case LOGOUT:
+    case AuthActionTypes.logout:
       localStorage.removeItem('token');
       return {
         ...state,
@@ -49,7 +40,7 @@ export default (state, action) => {
         user: null,
         error: null
       };
-    case CLEAR_ERRORS:
+    case AuthActionTypes.clearErrors:
       return {
         ...state,
         error: null
@@ -59,3 +50,5 @@ export default (state, action) => {
       return state;
   }
 };
+
+export default AuthReducer;
