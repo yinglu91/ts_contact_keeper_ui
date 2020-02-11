@@ -8,7 +8,7 @@ const initialState = {
   type: 'personal'
 };
 
-const ContactForm = props => {
+const ContactForm: React.FC = props => {
   const contactContext = useContext(ContactContext);
   const { addContact, updateContact, clearCurrent, current } = contactContext;
 

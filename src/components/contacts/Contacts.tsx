@@ -4,7 +4,7 @@ import ContactItem from './ContactItem';
 import ContactContext from '../../context/contact/contactContext';
 import Spinner from '../layout/Spinner';
 
-const Contacts = () => {
+const Contacts: React.FC = () => {
   const contactContext = useContext(ContactContext);
   const { contacts, filtered, getContacts, loading } = contactContext;
 

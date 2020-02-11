@@ -4,7 +4,7 @@ import ContactForm from '../contacts/ContactForm';
 import ContactFilter from '../contacts/ContactFilter';
 import AuthContext from '../../context/auth/authContext';
 
-const Home = () => {
+const Home: React.FC = () => {
   const authContext = useContext(AuthContext);
   const { loadUser } = authContext;
 
