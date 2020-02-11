@@ -35,7 +35,7 @@ const AuthState: React.ComponentType<Props> = props => {
 
       dispatch({
         type: AuthActionTypes.userLoaded, //USER_LOADED,
-        payload: res.data
+        user: res.data
       });
     } catch (err) {
       dispatch({

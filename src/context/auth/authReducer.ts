@@ -7,7 +7,7 @@ const AuthReducer = (state: AuthReducerState, action: AuthAction) => {
         ...state,
         isAuthenticated: true,
         loading: false,
-        user: action.payload
+        user: action.user
       };
     case AuthActionTypes.registerSuccess:
     case AuthActionTypes.loginSuccess:

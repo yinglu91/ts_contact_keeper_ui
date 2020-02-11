@@ -38,7 +38,7 @@ export interface RegisterFailAction {
 
 export interface UserLoadedAction {
   type: AuthActionTypes.userLoaded;
-  payload: User;
+  user: User;
 }
 
 export interface AuthErrorAction {
