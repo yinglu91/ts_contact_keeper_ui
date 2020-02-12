@@ -1,17 +1,25 @@
 import React, { useState, useContext, useEffect } from 'react';
+import { RouteComponentProps } from 'react-router-dom';
+
 import AlertContext from '../../context/alert/alertContext';
+import { AlertContextProps } from '../../context/alert/types';
+
 import AuthContext from '../../context/auth/authContext';
+import { AuthContextProps } from '../../context/auth/types';
 
 const initialUser = {
   email: '',
   password: ''
 };
 
-const Login: React.FC = props => {
-  const alertContext = useContext(AlertContext);
-  const { setAlert } = alertContext;
+interface Props extends RouteComponentProps<any> {
+  /* other props for the FC */
+}
 
-  const authContext = useContext(AuthContext);
+const Login: React.FC<Props> = props => {
+  const { setAlert } = useContext<AlertContextProps>(AlertContext);
+
+  const authContext = useContext<AuthContextProps>(AuthContext);
   const { login, error, clearErrors, isAuthenticated } = authContext;
 
   useEffect(() => {

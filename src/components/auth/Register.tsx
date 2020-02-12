@@ -1,6 +1,11 @@
 import React, { useState, useContext, useEffect } from 'react';
+import { RouteComponentProps } from 'react-router-dom';
+
 import AlertContext from '../../context/alert/alertContext';
+import { AlertContextProps } from '../../context/alert/types';
+
 import AuthContext from '../../context/auth/authContext';
+import { AuthContextProps } from '../../context/auth/types';
 
 const initialUser = {
   name: '',
@@ -9,11 +14,14 @@ const initialUser = {
   password2: ''
 };
 
-const Register: React.FC = props => {
-  const alertContext = useContext(AlertContext);
-  const { setAlert } = alertContext;
+interface Props extends RouteComponentProps<any> {
+  /* other props for the FC */
+}
 
-  const authContext = useContext(AuthContext);
+const Register: React.FC<Props> = props => {
+  const { setAlert } = useContext<AlertContextProps>(AlertContext);
+
+  const authContext = useContext<AuthContextProps>(AuthContext);
   const { register, error, clearErrors, isAuthenticated } = authContext;
 
   useEffect(() => {
@@ -33,9 +41,10 @@ const Register: React.FC = props => {
 
   const { name, email, password, password2 } = user;
 
-  const onChange = e => setUser({ ...user, [e.target.name]: e.target.value });
+  const onChange = (e: React.ChangeEvent<HTMLInputElement>) =>
+    setUser({ ...user, [e.target.name]: e.target.value });
 
-  const onSubmit = e => {
+  const onSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
     if (name === '' || email === '' || password === '' || password2 === '') {
@@ -88,7 +97,7 @@ const Register: React.FC = props => {
             value={password}
             onChange={onChange}
             required
-            minLength='6'
+            minLength={6}
           />
         </div>
 
@@ -100,7 +109,7 @@ const Register: React.FC = props => {
             value={password2}
             onChange={onChange}
             required
-            minLength='6'
+            minLength={6}
           />
         </div>
 
