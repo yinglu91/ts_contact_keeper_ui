@@ -1,5 +1,6 @@
 import React, { useState, useContext, useEffect } from 'react';
 import ContactContext from '../../context/contact/contactContext';
+import { ContactContextProps } from '../../context/contact/types';
 
 const initialState = {
   name: '',
@@ -9,7 +10,7 @@ const initialState = {
 };
 
 const ContactForm: React.FC = props => {
-  const contactContext = useContext(ContactContext);
+  const contactContext = useContext<ContactContextProps>(ContactContext);
   const { addContact, updateContact, clearCurrent, current } = contactContext;
 
   useEffect(() => {
@@ -24,10 +25,10 @@ const ContactForm: React.FC = props => {
 
   const { name, email, phone, type } = contact;
 
-  const onChange = e =>
+  const onChange = (e: React.ChangeEvent<HTMLInputElement>) =>
     setContact({ ...contact, [e.target.name]: e.target.value });
 
-  const onSubmit = e => {
+  const onSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
     if (current === null) {

@@ -1,10 +1,12 @@
 import React, { useContext, useRef, useEffect } from 'react';
+
 import ContactContext from '../../context/contact/contactContext';
+import { ContactContextProps } from '../../context/contact/types';
 
 const ContactFilter: React.FC = () => {
-  const contactContext = useContext(ContactContext);
+  const contactContext = useContext<ContactContextProps>(ContactContext);
   const { filterContacts, clearFilter, filtered } = contactContext;
-  const text = useRef('');
+  const text = useRef<HTMLInputElement>(null);
 
   useEffect(() => {
     if (filtered === null) {
@@ -12,7 +14,7 @@ const ContactFilter: React.FC = () => {
     }
   });
 
-  const onChange = e => {
+  const onChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     if (text.current.value !== '') {
       // actual value of input not empty
       filterContacts(e.target.value);

@@ -1,9 +1,13 @@
 import React, { useContext } from 'react';
-import PropTypes from 'prop-types';
 import ContactContext from '../../context/contact/contactContext';
+import { ContactContextProps, Contact } from '../../context/contact/types';
 
-const ContactItem: React.FC = ({ contact }) => {
-  const contactContext = useContext(ContactContext);
+interface Props {
+  contact: Contact;
+}
+
+const ContactItem: React.FC<Props> = ({ contact }) => {
+  const contactContext = useContext<ContactContextProps>(ContactContext);
   const { deleteContact, setCurrent, clearCurrent } = contactContext;
 
   const { _id, name, email, phone, type } = contact;
@@ -54,10 +58,6 @@ const ContactItem: React.FC = ({ contact }) => {
       </p>
     </div>
   );
-};
-
-ContactItem.propTypes = {
-  contact: PropTypes.object.isRequired
 };
 
 export default ContactItem;

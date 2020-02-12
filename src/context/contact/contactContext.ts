@@ -18,6 +18,6 @@ const initialState = {
   filterContacts: () => null,
   clearFilter: () => null
 };
-const contactContext = createContext<Partial<ContactContextProps>>({}); //createContext<ContactContextProps>(initialState);
+const contactContext = createContext<ContactContextProps>(initialState); //createContext<Partial<ContactContextProps>>({});
 
 export default contactContext;
