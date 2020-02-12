@@ -1,47 +1,50 @@
+// import {
+//   GET_CONTACTS,
+//   ADD_CONTACT,
+//   UPDATE_CONTACT,
+//   DELETE_CONTACT,
+//   CONTACT_ERROR,
+//   SET_CURRENT,
+//   CLEAR_CURRENT,
+//   FILTER_CONTACTS,
+//   CLEAR_CONTACTS,
+//   CLEAR_FILTER
+// } from '../types';
 import {
-  GET_CONTACTS,
-  ADD_CONTACT,
-  UPDATE_CONTACT,
-  DELETE_CONTACT,
-  CONTACT_ERROR,
-  SET_CURRENT,
-  CLEAR_CURRENT,
-  FILTER_CONTACTS,
-  CLEAR_CONTACTS,
-  CLEAR_FILTER
-} from '../types';
+  ContactActionTypes,
+  ContactAction,
+  ContactReducerState
+} from './types';
 
-export default (state, action) => {
+export default (state: ContactReducerState, action: ContactAction) => {
   switch (action.type) {
-    case GET_CONTACTS:
+    case ContactActionTypes.getContacts: //GET_CONTACTS:
       return {
         ...state,
-        contacts: action.payload,
+        contacts: action.contacts, //payload,
         loading: false
       };
-    case ADD_CONTACT:
+    case ContactActionTypes.addContact: //ADD_CONTACT:
       return {
         ...state,
-        contacts: [action.payload, ...state.contacts],
+        contacts: [action.contact, ...state.contacts],
         loading: false
       };
-    case UPDATE_CONTACT:
+    case ContactActionTypes.updateContact:
       return {
         ...state,
         contacts: state.contacts.map(contact =>
-          contact._id === action.payload._id ? action.payload : contact
+          contact._id === action.contact._id ? action.contact : contact
         ),
         loading: false
       };
-    case DELETE_CONTACT:
+    case ContactActionTypes.deleteContact:
       return {
         ...state,
-        contacts: state.contacts.filter(
-          contact => contact._id !== action.payload
-        ),
+        contacts: state.contacts.filter(contact => contact._id !== action._id),
         loading: false
       };
-    case CLEAR_CONTACTS:
+    case ContactActionTypes.clearContacts:
       return {
         ...state,
         contacts: null,
@@ -49,30 +52,30 @@ export default (state, action) => {
         filtered: null,
         error: null
       };
-    case CONTACT_ERROR:
+    case ContactActionTypes.contactError:
       return {
         ...state,
-        error: action.payload
+        error: action.error
       };
-    case SET_CURRENT:
+    case ContactActionTypes.setCurrent:
       return {
         ...state,
-        current: action.payload
+        current: action.current
       };
-    case CLEAR_CURRENT:
+    case ContactActionTypes.clearCurrent:
       return {
         ...state,
         current: null
       };
-    case FILTER_CONTACTS:
+    case ContactActionTypes.filterContacts:
       return {
         ...state,
         filtered: state.contacts.filter(contact => {
-          const regex = new RegExp(`${action.payload}`, 'gi');
+          const regex = new RegExp(`${action.text}`, 'gi');
           return contact.name.match(regex) || contact.email.match(regex);
         })
       };
-    case CLEAR_FILTER:
+    case ContactActionTypes.clearFilter:
       return {
         ...state,
         filtered: null
