@@ -2,14 +2,23 @@ import React, { useContext } from 'react';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 import AuthContext from '../../context/auth/authContext';
+import { AuthContextProps } from '../../context/auth/types';
 import ContactContext from '../../context/contact/contactContext';
+import { ContactContextProps } from '../../context/contact/types';
 
-const Navbar: React.FC = ({ title, icon }) => {
-  const authContext = useContext(AuthContext);
+interface Props {
+  title?: string;
+  icon?: string;
+}
+
+const Navbar: React.FC<Props> = ({
+  title = 'Contact Keeper',
+  icon = 'fas fa-id-card-alt'
+}) => {
+  const authContext = useContext<AuthContextProps>(AuthContext);
   const { isAuthenticated, logout, user } = authContext;
 
-  const contactContext = useContext(ContactContext);
-  const { clearContacts } = contactContext;
+  const { clearContacts } = useContext<ContactContextProps>(ContactContext);
 
   const onLogout = () => {
     logout();
@@ -50,16 +59,6 @@ const Navbar: React.FC = ({ title, icon }) => {
       <ul>{isAuthenticated ? authLinks : guestLinks}</ul>
     </div>
   );
-};
-
-Navbar.propTypes = {
-  title: PropTypes.string.isRequired,
-  icon: PropTypes.string
-};
-
-Navbar.defaultProps = {
-  title: 'Contact Keeper',
-  icon: 'fas fa-id-card-alt'
 };
 
 export default Navbar;
