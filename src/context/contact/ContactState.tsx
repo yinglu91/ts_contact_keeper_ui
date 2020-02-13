@@ -95,11 +95,11 @@ const ContactState: React.ComponentType<Props> = props => {
   };
 
   // Delete Contact
-  const deleteContact = async (id: string) => {
+  const deleteContact = async (contactId: string) => {
     try {
-      axios.delete(`/api/contacts/${id}`);
+      axios.delete(`/api/contacts/${contactId}`);
 
-      dispatch({ type: ContactActionTypes.deleteContact, _id: id });
+      dispatch({ type: ContactActionTypes.deleteContact, contactId });
     } catch (err) {
       dispatch({
         type: ContactActionTypes.contactError,

@@ -23,7 +23,7 @@ if (localStorage.token) {
   setAuthToken(localStorage.token);
 }
 
-const App = () => {
+const App: React.FC = () => {
   return (
     <AuthState>
       <ContactState>

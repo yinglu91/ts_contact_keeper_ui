@@ -41,7 +41,9 @@ export default (state: ContactReducerState, action: ContactAction) => {
     case ContactActionTypes.deleteContact:
       return {
         ...state,
-        contacts: state.contacts.filter(contact => contact._id !== action._id),
+        contacts: state.contacts.filter(
+          contact => contact._id !== action.contactId
+        ),
         loading: false
       };
     case ContactActionTypes.clearContacts:

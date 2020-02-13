@@ -55,7 +55,7 @@ export interface UpdateContactAction {
 
 export interface DeleteContactAction {
   type: ContactActionTypes.deleteContact;
-  _id: string;
+  contactId: string;
 }
 
 export interface ContactErrorAction {
