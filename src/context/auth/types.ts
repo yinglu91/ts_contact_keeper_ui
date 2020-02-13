@@ -19,7 +19,7 @@ export interface User {
   name: string;
   email: string;
   password?: string;
-  date: Date;
+  date?: Date;
 }
 
 export interface Auth {
@@ -82,7 +82,7 @@ export interface AuthReducerState {
   token: string;
   isAuthenticated: boolean;
   loading: boolean;
-  user: User;
+  user: User | null;
   error: string;
 }
 

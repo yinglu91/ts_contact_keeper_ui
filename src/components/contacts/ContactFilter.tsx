@@ -10,12 +10,12 @@ const ContactFilter: React.FC = () => {
 
   useEffect(() => {
     if (filtered === null) {
-      text.current.value = '';
+      text.current!.value = '';
     }
   });
 
   const onChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    if (text.current.value !== '') {
+    if (text.current!.value !== '') {
       // actual value of input not empty
       filterContacts(e.target.value);
     } else {

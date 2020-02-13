@@ -3,9 +3,10 @@ import Contacts from '../contacts/Contacts';
 import ContactForm from '../contacts/ContactForm';
 import ContactFilter from '../contacts/ContactFilter';
 import AuthContext from '../../context/auth/authContext';
+import { AuthContextProps } from '../../context/auth/types';
 
 const Home: React.FC = () => {
-  const authContext = useContext(AuthContext);
+  const authContext = useContext<AuthContextProps>(AuthContext);
   const { loadUser } = authContext;
 
   useEffect(() => {

@@ -2,18 +2,7 @@ import React, { useReducer } from 'react';
 import axios from 'axios';
 import ContactContext from './contactContext';
 import contactReducer from './contactReducer';
-// import {
-//   GET_CONTACTS,
-//   ADD_CONTACT,
-//   UPDATE_CONTACT,
-//   DELETE_CONTACT,
-//   CONTACT_ERROR,
-//   SET_CURRENT,
-//   CLEAR_CURRENT,
-//   FILTER_CONTACTS,
-//   CLEAR_CONTACTS,
-//   CLEAR_FILTER
-// } from '../types';
+
 import { ContactActionTypes, ContactReducerState, Contact } from './types';
 
 interface Props {
@@ -22,10 +11,10 @@ interface Props {
 
 const ContactState: React.ComponentType<Props> = props => {
   const initialState: ContactReducerState = {
-    contacts: null,
-    current: null,
-    filtered: null,
-    error: null,
+    contacts: [],
+    current: {} as Contact,
+    filtered: [],
+    error: '',
     loading: false
   };
 
@@ -34,7 +23,7 @@ const ContactState: React.ComponentType<Props> = props => {
   // all the actions
 
   // Get Contacts
-  const getContacts = async () => {
+  const getContacts = async (): Promise<void> => {
     try {
       const res = await axios.get('/api/contacts');
 
@@ -51,7 +40,7 @@ const ContactState: React.ComponentType<Props> = props => {
   };
 
   // Add Contact
-  const addContact = async (contact: Contact) => {
+  const addContact = async (contact: Contact): Promise<void> => {
     const config = {
       headers: {
         'Content-Type': 'application/json'
@@ -71,7 +60,7 @@ const ContactState: React.ComponentType<Props> = props => {
   };
 
   // Update Contact
-  const updateContact = async (contact: Contact) => {
+  const updateContact = async (contact: Contact): Promise<void> => {
     const config = {
       headers: {
         'Content-Type': 'application/json'
@@ -95,7 +84,7 @@ const ContactState: React.ComponentType<Props> = props => {
   };
 
   // Delete Contact
-  const deleteContact = async (contactId: string) => {
+  const deleteContact = async (contactId: string): Promise<void> => {
     try {
       axios.delete(`/api/contacts/${contactId}`);
 

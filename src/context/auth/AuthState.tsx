@@ -4,7 +4,7 @@ import AuthContext from './authContext';
 import authReducer from './authReducer';
 import setAuthToken from '../../utils/setAuthToken';
 
-import { AuthActionTypes, AuthReducerState } from './types';
+import { AuthActionTypes, AuthReducerState, AuthAction, User } from './types';
 
 interface Props {
   children: React.ReactNode;
@@ -12,14 +12,17 @@ interface Props {
 
 const AuthState: React.ComponentType<Props> = props => {
   const initialState: AuthReducerState = {
-    token: localStorage.getItem('token'),
-    isAuthenticated: null,
+    token: localStorage.getItem('token') || '',
+    isAuthenticated: false,
     loading: true,
     user: null,
-    error: null
+    error: ''
   };
 
-  const [state, dispatch] = useReducer(authReducer, initialState);
+  const [state, dispatch] = useReducer<AuthAction, AuthReducerState>(
+    authReducer,
+    initialState
+  );
 
   // all the actions
 
@@ -46,7 +49,7 @@ const AuthState: React.ComponentType<Props> = props => {
   };
 
   // Register User
-  const register = async formData => {
+  const register = async (formData: User) => {
     const config = {
       headers: {
         'Content-Type': 'application/json'
@@ -71,7 +74,7 @@ const AuthState: React.ComponentType<Props> = props => {
   };
 
   // Login User
-  const login = async formData => {
+  const login = async (formData: User) => {
     const config = {
       headers: {
         'Content-Type': 'application/json'

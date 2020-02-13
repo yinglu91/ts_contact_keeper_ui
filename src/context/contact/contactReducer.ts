@@ -1,30 +1,19 @@
-// import {
-//   GET_CONTACTS,
-//   ADD_CONTACT,
-//   UPDATE_CONTACT,
-//   DELETE_CONTACT,
-//   CONTACT_ERROR,
-//   SET_CURRENT,
-//   CLEAR_CURRENT,
-//   FILTER_CONTACTS,
-//   CLEAR_CONTACTS,
-//   CLEAR_FILTER
-// } from '../types';
 import {
   ContactActionTypes,
   ContactAction,
-  ContactReducerState
+  ContactReducerState,
+  Contact
 } from './types';
 
 export default (state: ContactReducerState, action: ContactAction) => {
   switch (action.type) {
-    case ContactActionTypes.getContacts: //GET_CONTACTS:
+    case ContactActionTypes.getContacts:
       return {
         ...state,
-        contacts: action.contacts, //payload,
+        contacts: action.contacts,
         loading: false
       };
-    case ContactActionTypes.addContact: //ADD_CONTACT:
+    case ContactActionTypes.addContact:
       return {
         ...state,
         contacts: [action.contact, ...state.contacts],
@@ -49,10 +38,11 @@ export default (state: ContactReducerState, action: ContactAction) => {
     case ContactActionTypes.clearContacts:
       return {
         ...state,
-        contacts: null,
-        current: null,
-        filtered: null,
-        error: null
+        contacts: [],
+        current: {} as Contact,
+        filtered: [],
+        error: '',
+        loading: false
       };
     case ContactActionTypes.contactError:
       return {
@@ -67,7 +57,7 @@ export default (state: ContactReducerState, action: ContactAction) => {
     case ContactActionTypes.clearCurrent:
       return {
         ...state,
-        current: null
+        current: {} as Contact
       };
     case ContactActionTypes.filterContacts:
       return {
@@ -80,7 +70,7 @@ export default (state: ContactReducerState, action: ContactAction) => {
     case ContactActionTypes.clearFilter:
       return {
         ...state,
-        filtered: null
+        filtered: []
       };
 
     default:

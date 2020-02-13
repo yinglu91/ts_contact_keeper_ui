@@ -1,9 +1,9 @@
 import { createContext } from 'react';
-import { ContactContextProps } from './types';
+import { ContactContextProps, Contact } from './types';
 
 const initialState = {
   contacts: [],
-  current: null,
+  current: {} as Contact,
   filtered: [],
   error: '',
   loading: false,
