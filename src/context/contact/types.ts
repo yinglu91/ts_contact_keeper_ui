@@ -13,7 +13,6 @@ export enum ContactActionTypes {
   clearCurrent,
 
   filterContacts,
-
   clearFilter
 }
 
@@ -103,18 +102,18 @@ export type ContactAction =
 
 export interface ContactReducerState {
   contacts: Contact[];
-  current: Contact;
+  current: Contact | null;
   filtered: Contact[];
-  error: string;
+  error: string | null;
   loading: boolean;
 }
 
 // Contact context (store) holds state & functions
 export interface ContactContextProps {
   contacts: Contact[];
-  current: Contact;
+  current: Contact | null;
   filtered: Contact[];
-  error: string;
+  error: string | null;
   loading: boolean;
 
   getContacts: Function;

@@ -39,9 +39,9 @@ export default (state: ContactReducerState, action: ContactAction) => {
       return {
         ...state,
         contacts: [],
-        current: {} as Contact,
+        current: null,
         filtered: [],
-        error: '',
+        error: null,
         loading: false
       };
     case ContactActionTypes.contactError:
@@ -57,7 +57,7 @@ export default (state: ContactReducerState, action: ContactAction) => {
     case ContactActionTypes.clearCurrent:
       return {
         ...state,
-        current: {} as Contact
+        current: null
       };
     case ContactActionTypes.filterContacts:
       return {

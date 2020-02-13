@@ -79,20 +79,20 @@ export type AuthAction =
  */
 
 export interface AuthReducerState {
-  token: string;
+  token: string | null;
   isAuthenticated: boolean;
   loading: boolean;
   user: User | null;
-  error: string;
+  error: string | null;
 }
 
 // Auth context (store) holds state & functions
 export interface AuthContextProps {
-  token: string;
+  token: string | null;
   isAuthenticated: boolean;
   loading: boolean;
-  user: User;
-  error: string;
+  user: User | null;
+  error: string | null;
 
   register: Function;
   loadUser: Function;

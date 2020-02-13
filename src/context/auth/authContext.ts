@@ -1,9 +1,9 @@
 import { createContext } from 'react';
 
-import { AuthContextProps, User } from './types';
+import { AuthContextProps } from './types';
 
 const initialState = {
-  token: '',
+  token: null,
   isAuthenticated: false,
   loading: false,
   user: null,

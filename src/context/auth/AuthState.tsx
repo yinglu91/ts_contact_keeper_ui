@@ -14,20 +14,19 @@ const AuthState: React.ComponentType<Props> = props => {
   const initialState: AuthReducerState = {
     token: localStorage.getItem('token') || '',
     isAuthenticated: false,
-    loading: true,
-    user: null,
+    loading: false,
+    user: {} as User,
     error: ''
   };
 
-  const [state, dispatch] = useReducer<AuthAction, AuthReducerState>(
-    authReducer,
-    initialState
-  );
+  const [state, dispatch] = useReducer<
+    React.Reducer<AuthReducerState, AuthAction>
+  >(authReducer, initialState);
 
   // all the actions
 
   // Load User
-  const loadUser = async () => {
+  const loadUser = async (): Promise<void> => {
     // @todo - load token into global headers
     if (localStorage.token) {
       setAuthToken(localStorage.token);
@@ -49,7 +48,7 @@ const AuthState: React.ComponentType<Props> = props => {
   };
 
   // Register User
-  const register = async (formData: User) => {
+  const register = async (formData: User): Promise<void> => {
     const config = {
       headers: {
         'Content-Type': 'application/json'
@@ -74,7 +73,7 @@ const AuthState: React.ComponentType<Props> = props => {
   };
 
   // Login User
-  const login = async (formData: User) => {
+  const login = async (formData: User): Promise<void> => {
     const config = {
       headers: {
         'Content-Type': 'application/json'

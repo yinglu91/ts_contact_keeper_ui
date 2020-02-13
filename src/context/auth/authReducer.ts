@@ -1,6 +1,9 @@
 import { AuthActionTypes, AuthAction, AuthReducerState } from './types';
 
-const AuthReducer = (state: AuthReducerState, action: AuthAction) => {
+const AuthReducer: React.Reducer<AuthReducerState, AuthAction> = (
+  state: AuthReducerState,
+  action: AuthAction
+) => {
   switch (action.type) {
     case AuthActionTypes.userLoaded:
       return {
@@ -24,7 +27,7 @@ const AuthReducer = (state: AuthReducerState, action: AuthAction) => {
       localStorage.removeItem('token');
       return {
         ...state,
-        token: null,
+        token: '',
         isAuthenticated: false,
         loading: false,
         user: null,

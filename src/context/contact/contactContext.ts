@@ -3,9 +3,9 @@ import { ContactContextProps, Contact } from './types';
 
 const initialState = {
   contacts: [],
-  current: {} as Contact,
+  current: null,
   filtered: [],
-  error: '',
+  error: null,
   loading: false,
 
   getContacts: () => null,

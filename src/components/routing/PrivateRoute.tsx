@@ -11,7 +11,7 @@ export interface ProtectedRouteProps extends RouteProps {
 }
 
 // very common for create a private component
-const PrivateRoute: React.FC<RouteProps> = ({
+const PrivateRoute: React.ComponentType<any> = ({
   component: Component,
   ...rest
 }) => {

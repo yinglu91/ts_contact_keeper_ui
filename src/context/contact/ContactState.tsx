@@ -12,7 +12,7 @@ interface Props {
 const ContactState: React.ComponentType<Props> = props => {
   const initialState: ContactReducerState = {
     contacts: [],
-    current: {} as Contact,
+    current: null,
     filtered: [],
     error: '',
     loading: false
