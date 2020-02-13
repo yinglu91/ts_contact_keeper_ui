@@ -1,5 +1,5 @@
 import { createContext } from 'react';
-import { ContactContextProps, Contact } from './types';
+import { ContactContextProps } from './types';
 
 const initialState = {
   contacts: [],

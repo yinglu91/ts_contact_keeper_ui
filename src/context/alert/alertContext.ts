@@ -1,5 +1,5 @@
 import { createContext } from 'react';
-import { AlertContextProps, Alert } from './types';
+import { AlertContextProps } from './types';
 
 const initialState = {
   alerts: [],

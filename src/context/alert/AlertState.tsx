@@ -2,7 +2,7 @@ import React, { useReducer } from 'react';
 import uuid from 'uuid';
 import AlertContext from './alertContext';
 import alertReducer from './alertReducer';
-import { AlertActionTypes, AlertReducerState, Alert } from './types';
+import { AlertActionTypes, AlertReducerState } from './types';
 
 interface Props {
   children: React.ReactNode;

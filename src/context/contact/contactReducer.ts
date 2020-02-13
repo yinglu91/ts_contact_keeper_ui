@@ -1,8 +1,7 @@
 import {
   ContactActionTypes,
   ContactAction,
-  ContactReducerState,
-  Contact
+  ContactReducerState
 } from './types';
 
 export default (state: ContactReducerState, action: ContactAction) => {
