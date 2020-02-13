@@ -22,7 +22,7 @@ const Contacts: React.FC = () => {
     <>
       {contacts !== null && !loading ? (
         <TransitionGroup>
-          {filtered !== null
+          {filtered !== null && filtered.length > 0
             ? filtered.map(contact => (
                 <CSSTransition
                   key={contact._id}
