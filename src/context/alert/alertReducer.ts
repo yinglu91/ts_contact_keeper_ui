@@ -4,11 +4,11 @@ import { AlertActionTypes, AlertAction, AlertReducerState } from './types';
 export default (state: AlertReducerState, action: AlertAction) => {
   switch (action.type) {
     case AlertActionTypes.setAlert:
-      return { ...state, alerts: [...state.alerts, , action.payload] };
+      return { ...state, alerts: [...state.alerts, , action.alert] };
     case AlertActionTypes.removeAlert:
       return {
         ...state,
-        alerts: state.alerts.filter(alert => alert.id !== action.payload)
+        alerts: state.alerts.filter(alert => alert.id !== action.alertId)
       };
 
     default:

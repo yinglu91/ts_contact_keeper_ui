@@ -20,11 +20,11 @@ const AlertState: React.ComponentType<Props> = props => {
     const id: string = uuid.v4();
     dispatch({
       type: AlertActionTypes.setAlert,
-      payload: { msg, type, id }
+      alert: { msg, type, id }
     });
 
     setTimeout(
-      () => dispatch({ type: AlertActionTypes.removeAlert, payload: id }),
+      () => dispatch({ type: AlertActionTypes.removeAlert, alertId: id }),
       timeout
     );
   };

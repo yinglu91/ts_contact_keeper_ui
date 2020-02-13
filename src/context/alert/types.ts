@@ -17,12 +17,12 @@ export interface Alert {
 
 export interface SetAlertAction {
   type: AlertActionTypes.setAlert;
-  payload: Alert;
+  alert: Alert;
 }
 
 export interface RemoveAlertAction {
   type: AlertActionTypes.removeAlert;
-  payload: string; // id
+  alertId: string;
 }
 
 export type AlertAction = SetAlertAction | RemoveAlertAction;
