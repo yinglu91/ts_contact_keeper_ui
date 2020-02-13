@@ -12,10 +12,10 @@ interface Props {
 
 const AuthState: React.ComponentType<Props> = props => {
   const initialState: AuthReducerState = {
-    token: localStorage.getItem('token') || '',
+    token: localStorage.getItem('token') || null,
     isAuthenticated: false,
     loading: false,
-    user: {} as User,
+    user: null,
     error: ''
   };
 

@@ -1,8 +1,8 @@
 import { AuthActionTypes, AuthAction, AuthReducerState } from './types';
 
 const AuthReducer: React.Reducer<AuthReducerState, AuthAction> = (
-  state: AuthReducerState,
-  action: AuthAction
+  state,
+  action
 ) => {
   switch (action.type) {
     case AuthActionTypes.userLoaded:
